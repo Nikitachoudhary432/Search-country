@@ -1,8 +1,8 @@
 import React from "https://cdn.skypack.dev/react@17.0.1";
 import ReactDOM from "https://cdn.skypack.dev/react-dom@17.0.1";
 import { useState, useEffect } from "https://cdn.skypack.dev/react";
-import { Link } from 'react-router-dom';
-import { useNavigate } from 'react-router-dom';
+import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 function App() {
   const [error, setError] = useState(null);
@@ -13,8 +13,7 @@ function App() {
   const [filterParam, setFilterParam] = useState(["All"]);
 
   useEffect(() => {
-    fetch("https://restcountries.com/v3.1/all"
-    )
+    fetch("https://restcountries.com/v3.1/all")
       .then((res) => res.json())
       .then(
         (result) => {
@@ -35,19 +34,13 @@ function App() {
       if (item.region == filterParam) {
         return searchParam.some((newItem) => {
           return (
-            item[newItem]
-              .toString()
-              .toLowerCase()
-              .indexOf(q.toLowerCase()) > -1
+            item[newItem].toString().toLowerCase().indexOf(q.toLowerCase()) > -1
           );
         });
       } else if (filterParam == "All") {
         return searchParam.some((newItem) => {
           return (
-            item[newItem]
-              .toString()
-              .toLowerCase()
-              .indexOf(q.toLowerCase()) > -1
+            item[newItem].toString().toLowerCase().indexOf(q.toLowerCase()) > -1
           );
         });
       }
@@ -57,9 +50,9 @@ function App() {
   if (error) {
     return (
       <p>
-        {error.message}, if you get this error, the free API I used
-        might have stopped working, but I created a simple example that
-        demonstrate how this works,{" "}
+        {error.message}, if you get this error, the free API I used might have
+        stopped working, but I created a simple example that demonstrate how
+        this works,{" "}
         <a href="https://codepen.io/Spruce_khalifa/pen/mdXEVKq">
           {" "}
           check it out{" "}
@@ -69,8 +62,6 @@ function App() {
   } else if (!isLoaded) {
     return <>loading...</>;
   } else {
-
-
     return (
       <div className="wrapper">
         <div className="search-wrapper">
@@ -108,24 +99,22 @@ function App() {
         <ul className="card-grid">
           {search(data).map((item) => (
             <li>
-              <div className='grid'>
+              <div className="grid">
                 {search(item).map((item, index) => {
                   return (
-                    <div className='grid1'>
-                      <Link to={'/carddetail' + '/' + item.name.common}>
-
+                    <div className="grid1">
+                      <Link to={"/carddetail" + "/" + item.name.common}>
                         <article key={index}>
                           <img src={item.flags.png} alt="" />
-                          <div className='text' >
+                          <div className="text">
                             <h3>{item.name.common}</h3>
 
                             {/* <p>{item.languages}</p> */}
                           </div>
                         </article>
                       </Link>
-
                     </div>
-                  )
+                  );
                 })}
               </div>
             </li>
@@ -135,4 +124,3 @@ function App() {
     );
   }
 }
-
